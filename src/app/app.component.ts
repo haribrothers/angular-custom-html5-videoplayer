@@ -11,7 +11,7 @@ import {
 @Component({
   selector: "my-app",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent implements AfterViewInit {
   name = "Angular " + VERSION.major;
@@ -102,7 +102,7 @@ export class AppComponent implements AfterViewInit {
       var range = 0;
       var bf = this.videoElement.buffered;
       var time = this.videoElement.currentTime;
-      console.log(bf.length)
+      console.log(bf.length);
       while (!(bf.start(range) <= time && time <= bf.end(range))) {
         range += 1;
       }
@@ -112,14 +112,14 @@ export class AppComponent implements AfterViewInit {
       console.log(this.loadPercentage);
     });
 
-    this.videoElement.addEventListener('waiting', (data) => {
-        this.isLoadingContent = true;
-        this.isPlaying = false;
-      });
-      this.videoElement.addEventListener('playing', (data) => {
-        this.isLoadingContent = false;
-        this.isPlaying = true;
-      });
+    this.videoElement.addEventListener("waiting", data => {
+      this.isLoadingContent = true;
+      this.isPlaying = false;
+    });
+    this.videoElement.addEventListener("playing", data => {
+      this.isLoadingContent = false;
+      this.isPlaying = true;
+    });
 
     console.log(this.videoElement);
   }

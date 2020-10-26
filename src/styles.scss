@@ -9,8 +9,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: Lato;
 }
 
-*,*:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
