@@ -1,0 +1,249 @@
+p {
+  font-family: Lato;
+}
+
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.video-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+}
+
+.video-container .controls-container {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 50px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+  transition: opacity 0.5s linear;
+}
+
+.video-container .progress-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 8px;
+}
+
+.video-container .progress-controls .time-remaining {
+  margin: 4px;
+  width: 1;
+}
+
+.video-container .progress-controls .progress-bar {
+  width: 100%;
+  height: 3px;
+  max-height: 7px;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 8px;
+  position: relative;
+}
+
+.video-container .progress-controls .progress-bar:hover {
+  height: 8px;
+}
+
+
+.video-container .progress-controls .progress-bar .watched-bar,
+.video-container .progress-controls .progress-bar .playhead {
+  background: #8b53f1;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.video-container .progress-controls .progress-bar .watched-bar {
+  height: 110%;
+  width: 20%;
+  z-index: 1;
+}
+
+.video-container .progress-controls .progress-bar .loaded-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255);
+  height: 100%;
+  width: 20%;
+}
+
+.video-container .progress-controls .progress-bar .playhead {
+  height: 16px;
+  width: 16px;
+  max-height: 16px;
+  max-width: 16px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  z-index: 2;
+}
+
+.video-container .controls {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px;
+}
+
+.video-container .controls button {
+  background: none;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  margin: 0px;
+  opacity: 0.4;
+  transform: scale(0.9);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.video-container .controls button:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.video-container .controls button svg {
+  fill: white;
+  stroke: white;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  width: 100%;
+  height: 100%;
+}
+
+.video-container .controls button.volume svg path,
+.video-container .controls button.help svg,
+.video-container .controls button.episodes svg,
+.video-container .controls button.full-screen svg,
+.video-container .controls button.volume svg path,
+.video-container .controls button.cast svg {
+  fill: none;
+}
+
+.video-container .controls button.rewind svg,
+.video-container .controls button.fast-forward svg {
+  stroke: none;
+}
+
+.video-container .controls button.captions svg {
+  stroke: none;
+}
+
+.video-container .controls .title {
+  font-size: 1.25rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .video-container .controls .title {
+    display: none;
+  }
+}
+
+.video-container .controls .title .series {
+  color: #fefefe;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.video-container .controls .title .episode {
+  color: #a1a1a1;
+  font-size: 0.75em;
+  padding-left: 1vw;
+}
+
+.margin-left-auto {
+  margin-left: auto !important;
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  background: #ffffff;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+  z-index: 100;
+}
+.loader {
+  color: #ffffff;
+  text-indent: -9999em;
+  margin: 88px auto;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+  position: absolute;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}

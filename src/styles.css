@@ -1,0 +1,16 @@
+/* Add application styles & imports to this file! */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+*,*:before, *:after {
+  box-sizing: border-box;
+}
