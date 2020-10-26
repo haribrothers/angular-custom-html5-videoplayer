@@ -16,7 +16,7 @@ import {
 export class AppComponent implements AfterViewInit {
   name = "Angular " + VERSION.major;
 
-  public displayControllsOpacity = 1;
+  public displayControllsOpacity = 0;
   public isPlaying = false;
   public isFullVolume = true;
   public isFullScreen = false;
@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.videoElement = this.video.nativeElement;
     this.videoContainer.nativeElement.addEventListener("mousemove", () => {
-      // this.displayControls();
+      this.displayControls();
     });
     this.document.addEventListener("fullscreenchange", () => {
       if (!document.fullscreenElement) {
@@ -102,14 +102,12 @@ export class AppComponent implements AfterViewInit {
       var range = 0;
       var bf = this.videoElement.buffered;
       var time = this.videoElement.currentTime;
-      console.log(bf.length);
       while (!(bf.start(range) <= time && time <= bf.end(range))) {
         range += 1;
       }
       var loadStartPercentage = bf.start(range) / this.videoElement.duration;
       var loadEndPercentage = bf.end(range) / this.videoElement.duration;
       this.loadPercentage = loadEndPercentage * 100;
-      console.log(this.loadPercentage);
     });
 
     this.videoElement.addEventListener("waiting", data => {
@@ -119,6 +117,10 @@ export class AppComponent implements AfterViewInit {
     this.videoElement.addEventListener("playing", data => {
       this.isLoadingContent = false;
       this.isPlaying = true;
+    });
+
+    this.videoElement.addEventListener("ended", data => {
+      this.isPlaying = false;
     });
 
     console.log(this.videoElement);
@@ -131,7 +133,11 @@ export class AppComponent implements AfterViewInit {
       clearTimeout(this.controlsTimeout);
     }
     this.controlsTimeout = setTimeout(() => {
-      this.displayControllsOpacity = 0;
+      if (this.isPlaying) {
+        this.displayControllsOpacity = 0;
+      } else {
+        this.displayControllsOpacity = 1;
+      }
       document.body.style.cursor = "none";
     }, 5000);
   }
@@ -161,5 +167,9 @@ export class AppComponent implements AfterViewInit {
     } else {
       document.exitFullscreen();
     }
+  }
+
+  addTime(seconds: number = 10) {
+    this.videoElement.currentTime += seconds;
   }
 }

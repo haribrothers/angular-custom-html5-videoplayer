@@ -20,6 +20,86 @@ p {
     height: 100%;
   }
 
+  button {
+    background: none;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    svg {
+      fill: white;
+      stroke: white;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      width: 100%;
+      height: 100%;
+    }
+    &.rewind svg,
+    &.fast-forward svg {
+      stroke: none;
+    }
+    &.ripple {
+      position: relative;
+
+      &:after {
+        content: "";
+        background: rgba(255, 255, 255, 0.3);
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 160px;
+        height: 160px;
+        margin: auto;
+        opacity: 0;
+        transition: all 0.5s;
+      }
+      &:active:after {
+        height: 10px;
+        width: 10px;
+        opacity: 1;
+        transition: 0s;
+      }
+    }
+  }
+
+  .video-controls-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+
+    button {
+      width: 160px;
+      height: 160px;
+      min-width: 160px;
+      min-height: 160px;
+      padding: 50px;
+      background: rgba(0, 0, 0, 0.05);
+      opacity: 1;
+      overflow: hidden;
+      border-radius: 50%;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+  }
+
   .controls-container {
     position: absolute;
     bottom: 0px;
@@ -30,6 +110,7 @@ p {
     justify-content: flex-end;
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
     transition: opacity 0.5s linear;
+    z-index: 2;
   }
 
   .progress-controls {
@@ -104,92 +185,63 @@ p {
       }
     }
   }
-}
 
-.video-container .controls {
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding: 8px;
-}
+  .controls {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 8px;
 
-.video-container .controls button {
-  background: none;
-  outline: none;
-  box-shadow: none;
-  border: none;
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  margin: 0px;
-  opacity: 0.4;
-  transform: scale(0.9);
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
+    button {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+      opacity: 0.4;
+      transform: scale(0.9);
 
-.video-container .controls button:hover {
-  opacity: 1;
-  transform: scale(1.2);
-}
+      &:hover {
+        opacity: 1;
+        transform: scale(1.2);
+      }
 
-.video-container .controls button svg {
-  fill: white;
-  stroke: white;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  width: 100%;
-  height: 100%;
-}
+      &.volume svg path,
+      &.full-screen svg,
+      &.volume svg path {
+        fill: none;
+      }
+    }
 
-.video-container .controls button.volume svg path,
-.video-container .controls button.help svg,
-.video-container .controls button.episodes svg,
-.video-container .controls button.full-screen svg,
-.video-container .controls button.volume svg path,
-.video-container .controls button.cast svg {
-  fill: none;
-}
-
-.video-container .controls button.rewind svg,
-.video-container .controls button.fast-forward svg {
-  stroke: none;
-}
-
-.video-container .controls button.captions svg {
-  stroke: none;
-}
-
-.video-container .controls .title {
-  font-size: 1.25rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0;
-  margin: 0;
+    .title {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 8px;
+      margin: 0;
+      font-size: 1rem;
+      .series {
+        color: #fefefe;
+        font-weight: bold;
+        font-size: 1em;
+        line-height: 1;
+      }
+      .episode {
+        color: #a1a1a1;
+        font-size: 0.75em;
+        padding-left: 8px;
+        line-height: 1;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 768px) {
   .video-container .controls .title {
     display: none;
   }
-}
-
-.video-container .controls .title .series {
-  color: #fefefe;
-  font-weight: bold;
-  font-size: 1em;
-}
-
-.video-container .controls .title .episode {
-  color: #a1a1a1;
-  font-size: 0.75em;
-  padding-left: 1vw;
 }
 
 .margin-left-auto {
